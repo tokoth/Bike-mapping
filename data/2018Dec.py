@@ -3,8 +3,8 @@ import pandas as pd
 
 
 # Define filepath either relative or absolute path to file
-
-path = r'D:\WorkSpace\Bike Mapping\201812-citibike-tripdata\201812-citibike-tripdata.csv'
+#In our cases we use a relative path
+path = r'./201812-citibike-tripdata.csv'
 
 # Open csv file
 data = pd.read_csv(path)
@@ -33,5 +33,5 @@ print(df.head)
 df.rename(columns={0: 'StationID', 1: 'StationName', 2: 'Lat', 3: 'Lon'}, inplace=True)
 
 # Saving the dataframe to csv file
-outpath = r'D:\WorkSpace\Bike Mapping\201812-citibike-tripdata\2018Dec.csv'
+outpath = r'./2018Dec.csv'
 df.to_csv(outpath)
