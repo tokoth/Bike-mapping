@@ -4,7 +4,7 @@ import pandas as pd
 
 # Define filepath either relative or absolute path to file
 #In our cases we use a relative path
-path = r'./201812-citibike-tripdata.csv'
+path = r"D:\WorkSpace\Bike Mapping\201812-citibike-tripdata\201812-citibike-tripdata.csv"
 
 # Open csv file
 data = pd.read_csv(path)
@@ -34,4 +34,4 @@ df.rename(columns={0: 'StationID', 1: 'StationName', 2: 'Lat', 3: 'Lon'}, inplac
 
 # Saving the dataframe to csv file
 outpath = r'./2018Dec.csv'
-df.to_csv(outpath)
+df.to_csv(outpath, index=False)
