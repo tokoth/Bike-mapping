@@ -34,3 +34,53 @@ df.rename(columns = {0 :'StationID', 1 :'StationName',
 # saving the dataframe to csv file
 outpath = r'./2020Dec.csv'
 df.to_csv(outpath, index=False)
+
+
+#Converting Dataframe to GeoDataframe
+
+# Import necessary package geopandas
+import geopandas as gpd
+
+#Read in our cleaned data
+#Define file path add relative filepath to our data
+path = r'../data/2020Dec.csv'
+
+gdata = pd.read_csv(path)
+gdata.head()
+
+#Convert DataFrame to GeoDataFrame
+gdf = gpd.GeoDataFrame(
+    gdata, geometry=gpd.points_from_xy(gdata.Lon, gdata.Lat))
+gdf.head()
+
+#Assign crs to the geodataframe
+gdf = gdf.set_crs('epsg:4326')
+
+# Let's make a backup copy of our data
+gdf_merc = gdf.copy()
+
+#We will use the backup in our subsequent analysis
+gdf_merc = gdf_merc.to_crs(epsg=3857)
+
+#Import matplotlib package for our plotting and contextly for our basemaps
+import matplotlib.pyplot as plt
+import contextily as ctx
+
+# Create one subplot. Control figure size in here.
+fig, ax = plt.subplots(figsize=(10,20))
+
+#Plot the static map
+gdf_merc.plot(ax=ax,c="black")
+
+# Set title and label axes
+plt.title("Map Showing Bike usage in NewYork City, 2020", 
+          fontsize=14,color="black")
+plt.xlabel('Longitude', fontsize=18)
+plt.ylabel('Latitude', fontsize=18)
+
+#Add basemap from contextly
+ctx.add_basemap(ax)
+
+#Save the figure as png file with resolution of 100 dpi
+outfp = "2020_static_map.png"
+plt.savefig(outfp, dpi=100)
