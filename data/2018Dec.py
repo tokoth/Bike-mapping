@@ -45,22 +45,22 @@ import geopandas as gpd
 #Define file path add relative filepath to our data
 path = r'../data/2018Dec.csv'
 
-gdata = pd.read_csv(path)
-gdata.head()
+data2018 = pd.read_csv(path)
+data2018.head()
 
 #Convert DataFrame to GeoDataFrame
-gdf = gpd.GeoDataFrame(
-    gdata, geometry=gpd.points_from_xy(gdata.Lon, gdata.Lat))
-gdf.head()
+gdf_2018 = gpd.GeoDataFrame(
+    data2018, geometry=gpd.points_from_xy(data2018.Lon, data2018.Lat))
+gdf_2018.head()
 
 #Assign crs to the geodataframe
-gdf = gdf.set_crs('epsg:4326')
+gdf_2018 = gdf_2018.set_crs('epsg:4326')
 
 # Let's make a backup copy of our data
-gdf_merc = gdf.copy()
+gdf_merc18 = gdf_2018.copy()
 
 #We will use the backup in our subsequent analysis
-gdf_merc = gdf_merc.to_crs(epsg=3857)
+gdf_merc18 = gdf_merc18.to_crs(epsg=3857)
 
 #Import matplotlib package for our plotting and contextly for our basemaps
 import matplotlib.pyplot as plt
@@ -70,7 +70,7 @@ import contextily as ctx
 fig, ax = plt.subplots(figsize=(10,20))
 
 #Plot the static map
-gdf_merc.plot(ax=ax,c="black")
+gdf_merc18.plot(ax=ax,c="black")
 
 # Set title and label axes
 plt.title("Map Showing Bike usage in NewYork City, 2018", 
@@ -82,5 +82,92 @@ plt.ylabel('Latitude', fontsize=18)
 ctx.add_basemap(ax)
 
 #Save the figure as png file with resolution of 100 dpi
-outfp = "2018_static_map.png"
+outfp = "2018_static_map2.png"
 plt.savefig(outfp, dpi=100)
+
+#Repeat the same process for the 2019 and 2020 cleaned data
+
+#2019
+
+#Define file path add relative filepath to our data
+path = r'../data/2019Dec.csv'
+
+data2019 = pd.read_csv(path)
+
+#Convert DataFrame to GeoDataFrame
+gdf_2019 = gpd.GeoDataFrame(
+    data2019, geometry=gpd.points_from_xy(data2019.Lon, data2019.Lat))
+gdf_2019.head()
+
+#Assign crs to the geodataframe
+gdf_2019 = gdf_2019.set_crs('epsg:4326')
+# Let's make a backup copy of our data
+gdf_merc19 = gdf_2019.copy()
+#We will use the backup in our subsequent analysis
+gdf_merc19 = gdf_merc19.to_crs(epsg=3857)
+gdf_merc19.crs
+print('Finished with 2019')
+
+#2020
+
+#Define file path add relative filepath to our data
+path = r'../data/2020Dec.csv'
+
+data2020 = pd.read_csv(path)
+
+#Convert DataFrame to GeoDataFrame
+gdf_2020 = gpd.GeoDataFrame(
+    data2020, geometry=gpd.points_from_xy(data2020.Lon, data2020.Lat))
+gdf_2020.head()
+
+#Assign crs to the geodataframe
+gdf_2020 = gdf_2020.set_crs('epsg:4326')
+# Let's make a backup copy of our data
+gdf_merc20 = gdf_2020.copy()
+#We will use the backup in our subsequent analysis
+gdf_merc20 = gdf_merc20.to_crs(epsg=3857)
+gdf_merc20.crs
+print('Finished with 2020')
+
+#Interactive Mapping
+#Import folium package for interactive mapping
+import folium
+
+#Create Map instance
+
+m=folium.Map(location=[40.707222,-73.9909],tiles='OpenStreetMap', zoom_start=14, min_zoom=12, max_zoom=18)
+
+#Add another basemap layer
+folium.TileLayer('cartodbpositron').add_to(m)
+
+#Create feature groups
+f1=folium.FeatureGroup("Stations 2018")
+f2=folium.FeatureGroup("Stations 2019")
+f3=folium.FeatureGroup("Stations 2020")
+
+#Add the dataframes to our feature groups
+gd2018 = folium.GeoJson(gdf_merc18,marker=folium.Marker(
+                        icon=folium.Icon(color='darkblue')),
+                        tooltip=folium.GeoJsonTooltip(fields=["StationName"]),
+                       ).add_to(f1)
+gd2019 = folium.GeoJson(gdf_merc19,marker=folium.Marker(
+                        icon=folium.Icon(color='darkblue')),
+                        tooltip=folium.GeoJsonTooltip(fields=["StationName"]),
+                       ).add_to(f2)
+gd2020 = folium.GeoJson(gdf_merc20,marker=folium.Marker(
+                        icon=folium.Icon(color='darkblue')),
+                        tooltip=folium.GeoJsonTooltip(fields=["StationName"]),
+                       ).add_to(f3)
+
+#Add feature groups to Map instance
+f1.add_to(m)
+f2.add_to(m)
+f3.add_to(m)
+
+#Add layer Control
+folium.LayerControl().add_to(m)  # use folium to add layer control
+m
+
+#Save the interactive map to webpage
+outfp = "interactive_map2.html"
+m.save(outfp)
