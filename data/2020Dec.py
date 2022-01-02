@@ -11,29 +11,25 @@ data = pd.read_csv(path)
 print(data.columns)
 
 #Group data by columns we are interested in our case station where ride started
-group1 = data.groupby(['start station id',
+
+#Using the aggregate with groupby to group and 
+#count the number of occurences in each group and assign to a new dataframe
+df_grouped = data.groupby(['start station id',
        'start station name', 'start station latitude',
-       'start station longitude'])
+       'start station longitude'], as_index=False).agg(
+    count_col=pd.NamedAgg(column="start station id", aggfunc="count")
+)
 
-#Check our length of group
-print(len(group1))
+# Rename our columns
+df_grouped.rename(columns={'start station id': 'Station ID', 
+                    'start station name': 'Station Name', 
+                    'start station latitude': 'Lat', 
+                    'start station longitude': 'Lon', 
+                    'count_col':'Number of Trips'}, inplace=True)
 
-#Create a list to store our group keys
-key = [key for key, _ in group1]
-
-#Create a dataframe from the list
-df = pd.DataFrame(key)
-
-#Check our new dataframe first 5 rows
-print(df.head)
-
-#Rename our columns
-df.rename(columns = {0 :'StationID', 1 :'StationName',
-                    2 :'Lat', 3 :'Lon'}, inplace = True)
-
-# saving the dataframe to csv file
+# Saving the dataframe to csv file
 outpath = r'./2020Dec.csv'
-df.to_csv(outpath, index=False)
+df_grouped.to_csv(outpath, index=False)
 
 
 #Converting Dataframe to GeoDataframe
