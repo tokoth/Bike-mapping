@@ -31,7 +31,7 @@ Packages used was; Pandas, Geopandas, Matplotlib, Contextily, and Folium.
 
 The logical steps taken for this task is:
 1. Download the [Citi Bike System Data](https://ride.citibikenyc.com/system-data), December data for years 2018, 2019 and 2020. 
-2. Using Pandas to read the downloaded data, observe, analyse, group(by Station name and Station id), aggregate and write to an output csv file containing the cleaned data.
+2. Using Pandas to read the downloaded data, observe, analyse, group by (Station name and Station id), aggregate and write to an output csv file containing the cleaned data.
 3. Using GeoPandas to read in the cleaned data to a dataframe, convert it to a geodataframe. Create a backup copy of our data, assign a coordinate reference system(crs) to our geodataframe.
 4. Using Matplotlip to plot our geodataframes into static maps, using Contextily to add a basemap to our static maps and write to an output file of image format.
 5. Using Folium to create an interactive map instance, add all the geodataframes for the years as a feature group to our map instance. Save and output an interactive map to a webpage.
