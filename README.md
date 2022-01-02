@@ -1,5 +1,7 @@
 # `Bike Mapping`
-
+[![image](https://img.shields.io/twitter/follow/tyson_okoth?style=social)](https://twitter.com/tyson_okoth)
+[![LinkedIn Badge](https://img.shields.io/badge/My-LinkedIn-blue)](https://www.linkedin.com/in/okoth-tyson-0968a9178/)
+[![GitHub Badge](https://img.shields.io/github/followers/tokoth?style=social)](https://github.com/tokoth)
 
 ### About
 A  project looking into how to process, clean, and visualize huge open datasets.
