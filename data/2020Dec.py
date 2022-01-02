@@ -80,3 +80,10 @@ ctx.add_basemap(ax)
 #Save the figure as png file with resolution of 100 dpi
 outfp = "2020_static_map.png"
 plt.savefig(outfp, dpi=100)
+
+#Print output check statements when done
+
+print('The code ran successfully')
+print(f"There are {df_grouped.duplicated(subset='Station ID').sum()},"
+      f" duplicate values from a total of {len(df_grouped)},"
+      f" values in the cleaned dataset.")

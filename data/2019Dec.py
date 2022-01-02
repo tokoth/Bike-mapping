@@ -10,11 +10,15 @@ data = pd.read_csv(path)
 #Check our data columns
 print(data.columns)
 
+data1 = data[['start station id',
+       'start station name', 'start station latitude',
+       'start station longitude']]
+
 #Group data by columns we are interested in our case station where ride started
 
 #Using the aggregate with groupby to group and 
 #count the number of occurences in each group and assign to a new dataframe
-df_grouped = data.groupby(['start station id',
+df_grouped = data1.groupby(['start station id',
        'start station name', 'start station latitude',
        'start station longitude'], as_index=False).agg(
     count_col=pd.NamedAgg(column="start station id", aggfunc="count")
@@ -38,7 +42,7 @@ import geopandas as gpd
 
 #Read in our cleaned data
 #Define file path add relative filepath to our data
-path = r'../data/2019Dec.csv'
+path = r'./2019Dec.csv'
 
 gdata = pd.read_csv(path)
 gdata.head()
@@ -77,5 +81,12 @@ plt.ylabel('Latitude', fontsize=18)
 ctx.add_basemap(ax)
 
 #Save the figure as png file with resolution of 100 dpi
-outfp = "2019_static_map.png"
-plt.savefig(outfp, dpi=100)
+#outfp = "2019_static_map.png"
+#plt.savefig(outfp, dpi=100)
+
+#Print output check statements when done
+
+print('The code ran successfully')
+print(f"There are {df_grouped.duplicated(subset='Station ID').sum()},"
+      f" duplicate values from a total of {len(df_grouped)},"
+      f" values in the cleaned dataset.")
