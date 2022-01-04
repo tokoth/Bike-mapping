@@ -1,3 +1,4 @@
+<a name="top"></a>
 <h1 align="center">BIKE MAPPING</h1>
 
 [![Twitter](https://img.shields.io/badge/tyson_okoth-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/tyson_okoth)
@@ -5,6 +6,16 @@
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tokoth)
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tysonokoth8@gmail.com)
 
+## Table of Contents
+* [About](#About)
+* [Objective](#About)
+* [Results](#Results)
+* [Maps (Static and Interactive)](#Maps)
+* [Credits](#Credits)
+
+
+
+<a name="About"></a>
 ### About
 A  project looking into exploring, processing, cleaning, and visualizing huge open datasets, by exploring NYC Bike Share Data
 
@@ -28,7 +39,7 @@ For this data visualization project a few assumptions were made so as to map onl
     and the number of trips recorder from the station.
 
 
-### Data Processing
+#### Data Processing
 
 For this project the Python language and its packages were used in
 data reading, observing, cleaning, processing and visualization of the data.
@@ -46,7 +57,7 @@ The logical steps taken for this task is:
 5. Using Matplotlip to plot our geodataframes into static maps, using Contextily to add a basemap to our static maps and write to an output file of image format.
 6. Using Folium to create an interactive map instance, add all the geodataframes for the years as a feature group to our map instance. Save and output an interactive map to a webpage.
 
-
+<a name="Results"></a>
 ### Results
 
 Read in the downloaded data and display using Pandas.
@@ -100,3 +111,19 @@ We check the CRS of our geodataframe using .crs method, which shows the EPSG cod
 ```
 
 ![Image](https://drive.google.com/uc?export=view&id=1zwrgfgcDSvmcbYABTeQIqZVyHmiOKccz)
+
+The CRS of our geodataframe, Web Mercator(EPSG:3857) is projected coordinate system used for rendering maps in Google Maps, OpenStreetMaps. It is mostly used in web mapping and visualization applications.
+
+We will use the geodataframe to plot a Static map with basemap as well as an Interactive map.
+
+
+<a name="Maps"></a>
+### Maps (Static and Interactive)
+A  project looking into exploring, processing, cleaning, and visu
+
+
+<a name="Credits"></a>
+### Credits
+
+
+[`Back to Top`](#top)
