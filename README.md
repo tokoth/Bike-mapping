@@ -137,8 +137,7 @@ Explore the interactive map further [here](https://tokoth.github.io/Bike-mapping
 ### Credits
 
 Huge credits to [Citi Bike System Data](https://ride.citibikenyc.com/system-data) New York City, for publishing there bike rides data, this is used as my datasource for the project.
+
 [Explore Bike share data](https://towardsdatascience.com/exploring-bike-share-data-3e3b2f28760c), The blog was a helpful guide when processing the data using Pandas. 
 
 [`Back to Top`](#top)
-
-<footer> Page by Tyson Okoth &copy; Copyright 2022. </footer>
