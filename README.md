@@ -129,12 +129,15 @@ A Static Map plotted with Matplotlib and Contextily using information of the 201
 An Interactive map plotted with Folium showing the busiest bike stations used in the years 2018, 2019 ,and 2020. 
 You can interact with the map and change the basemap as well as switch and display the interested year.
 
-<iframe src="interactive_map.html" height="500" width="800"></iframe>
+<iframe src="interactive_map.html" height="700" width="1000"></iframe>
 
 Explore the interactive map further [here](https://tokoth.github.io/Bike-mapping/interactive_map.html).
 
 <a name="Credits"></a>
 ### Credits
 
-
+Huge credits to [Citi Bike System Data](https://ride.citibikenyc.com/system-data) New York City, for publishing there bike rides data, this is used as my datasource for the project.
+[Explore Bike share data](https://towardsdatascience.com/exploring-bike-share-data-3e3b2f28760c), The blog was helpful to guide when processing the data using Pandas. 
 [`Back to Top`](#top)
+
+<footer> Page by Tyson Okoth &copy; Copyright 2022. </footer>
