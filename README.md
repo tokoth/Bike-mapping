@@ -19,7 +19,7 @@
 
 <a name="About"></a>
 ### About
-A  project looking into exploring, processing, cleaning, and visualizing huge open datasets, by exploring NYC Bike Share Data
+A  project looking into processing, cleaning, and visualizing huge open datasets, by exploring NYC Bike Share Data
 
 ![Image](https://drive.google.com/uc?export=view&id=12RrVqvfGr7JIgHuept4swzHCWKOchnHF)
  
@@ -129,7 +129,7 @@ A Static Map plotted with Matplotlib and Contextily using information of the 201
 An Interactive map plotted with Folium showing the busiest bike stations used in the years 2018, 2019 ,and 2020. 
 You can interact with the map and change the basemap as well as switch and display the interested year.
 
-<iframe src="interactive_map.html" height="700" width="1000"></iframe>
+<iframe src="interactive_map.html" ></iframe>
 
 Explore the interactive map further [here](https://tokoth.github.io/Bike-mapping/interactive_map.html).
 
