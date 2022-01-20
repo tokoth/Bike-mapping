@@ -6,7 +6,7 @@ import folium
 
 
 def read_file(datapath):
-    """read and create a dataframe from csv fileread_file
+    """read and create a dataframe from csv file with a start day columns
     Args:
         datapath ([url]): Location of the raw csv file
     Returns:
@@ -14,6 +14,8 @@ def read_file(datapath):
     """
     #Read in the downloaded data
     data = pd.read_csv(datapath, parse_dates=['started_at','ended_at'])
+    data['start_day']=data['started_at'].apply(lambda x:x.day_name())
+    
     return data
 
 
