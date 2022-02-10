@@ -87,18 +87,23 @@ def origin_stations(args):
                     'start_lng': 'Lon', 
                     'count_col':'Number of Trips'}, inplace=True)
     # Saving the dataframe to csv file
-    #df_grouped.to_csv("filtered_data.csv", index=False)
+    df_grouped.to_csv("filtered_data.csv", index=False)
 
 
 # Call the functions for the dataframe.
 
+plot_busy_stations(data)
+plot_busy_days(data)
+origin_stations(data)
 
 #Print statement to check for duplicate values
+
 print(f"There are {df_grouped.duplicated(subset='Station ID').sum()},"
       f" duplicate values from a total of {len(df_grouped)},"
       f" values in the 2018 cleaned dataset.")
 
-#Read and process our cleaned 2018,2019 and 2020 datasets for mapping
+#We can now read and process our cleaned 2018,2019 and 2020 datasets
+# and pass them in the functions
 
 #2018
 
