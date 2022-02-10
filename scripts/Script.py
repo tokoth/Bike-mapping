@@ -15,12 +15,7 @@ data.head()
 data.info()
 
 #Create new column from starttime column showing the day of the week
-data['start day']=data['starttime'].dt.day.astype('category') 
-data['weekday']=data['starttime'].dt.weekday.astype('category')
-
-#Use mapping to rename the column values of weekday
-data['weekday'] = data['weekday'].map({0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'})
-data.head()
+data['start_day']=data['started_at'].apply(lambda x:x.day_name())
 
 #Use seaborn and matplotlib to plot the top 10 busiest stations
 
