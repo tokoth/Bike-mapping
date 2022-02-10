@@ -17,22 +17,31 @@ data.info()
 #Create new column from starttime column showing the day of the week
 data['start_day']=data['started_at'].apply(lambda x:x.day_name())
 
-#Use seaborn and matplotlib to plot the top 10 busiest stations
+# Create functions for plotting
 
-startstation = data['start station name'].value_counts()[:10]
-plt.figure(figsize=(18,10))
-sns.barplot( x=startstation.values , y=list(startstation.index), 
- orient="h" )
+# Use seaborn and matplotlib to plot the top 10 busiest stations
 
-#Add plot title, label axes and grid
-plt.title('Busiest bike stations', size=22, family='monospace')
-plt.ylabel('Station Name', fontsize=16)
-plt.xlabel('Trips taken', fontsize=16)
-plt.grid()
-plt.tight_layout
+def plot_busy_stations(args):
+    """Use seaborn and matplotlib to plot the top 10 busiest stations
+    Args:
+        args : pandas dataframe with station names column
+    """
 
-#Save the output to file
-#plt.savefig("busiest_stations.png", facecolor='white', dpi=300)
+    startstation = args["start_station_name"].value_counts()[:10]
+    plt.figure(figsize=(18, 10))
+    sns.barplot(x=startstation.values, y=list(startstation.index), orient="h")
+
+    # Add plot title, label axes and grid
+    plt.title("Busiest bike stations", size=22, family="monospace")
+    plt.ylabel("Station Name", fontsize=16)
+    plt.xlabel("Trips taken", fontsize=16)
+    plt.grid()
+    plt.tight_layout
+
+    # Save the output to file
+    #plt.savefig("images/busiest_stations.png", facecolor="white", dpi=300)
+
+    plt.show()
 
 #Group by day of the week and create a subset of the data
 group = data.groupby(['weekday'], as_index=False).agg(
