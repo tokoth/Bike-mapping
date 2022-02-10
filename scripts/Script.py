@@ -19,7 +19,7 @@ data['start_day']=data['started_at'].apply(lambda x:x.day_name())
 
 # Create functions for plotting
 
-# Use seaborn and matplotlib to plot the top 10 busiest stations
+# Use seaborn and matplotlib to plot the top 10 busiest stations and busiest days
 
 def plot_busy_stations(args):
     """Use seaborn and matplotlib to plot the top 10 busiest stations
@@ -43,47 +43,55 @@ def plot_busy_stations(args):
 
     plt.show()
 
-#Group by day of the week and create a subset of the data
-group = data.groupby(['weekday'], as_index=False).agg(
-    count_col=pd.NamedAgg(column="weekday", aggfunc="count")
-)
-group.rename(columns={'weekday': 'Day of Week', 
+
+def plot_busy_days(args):
+    """Use seaborn and matplotlib to plot the busiest rides by day
+    Args:
+        args : pandas dataframe with start day column
+    """
+    #Group by day of the week and create a subset of the data
+    group = args.groupby(['start_day'], as_index=False).agg(
+    count_col=pd.NamedAgg(column="start_day", aggfunc="count"))
+    
+    group.rename(columns={'start_day': 'Day of Week', 
                     'count_col':'Trips taken'}, inplace=True)
-group
+    group.sort_values(by='Trips taken',inplace=True)
+    
+    #Use seaborn and matplotlib to plot graph showing busiest day of the week
+    plt.figure(figsize=(12,10))
+    ax = sns.barplot(x = 'Day of Week',y = 'Trips taken', data = group)
+    
+    #Add plot title, label axes
+    plt.title('Rides by Day', size=20, family='monospace')
+    plt.ylabel('Trips taken', fontsize=16)
+    plt.xlabel('Day of Week', fontsize=16)
+    plt.tight_layout()
+    
+    plt.show()
 
-#Use seaborn and matplotlib to plot graph showing busiest day of the week
-plt.figure(figsize=(12,10))
-ax = sns.barplot(x = 'Day of Week',
-            y = 'Trips taken',
-            data = group)
-#Add plot title, label axes
-plt.title('Rides by Day', size=20, family='monospace')
-plt.ylabel('Trips taken', fontsize=16)
-plt.xlabel('Day of Week', fontsize=16)
-plt.tight_layout()
+# Create function to clean the data
 
-#Save the output to file
-#plt.savefig("rides_by_day.png", facecolor='white',dpi=300)
-
-#Using the aggregate with groupby to group and 
-#count the number of occurences in each group and assign to a new dataframe
-df_grouped = data.groupby(['start station id', 'start station name', 'start station latitude',
-       'start station longitude'], as_index=False).agg(
-    count_col=pd.NamedAgg(column="start station id", aggfunc="count")
-)
-
-print(len(df_grouped))
-
-# Rename our columns
-df_grouped.rename(columns={'start station id': 'Station ID', 
-                    'start station name': 'Station Name', 
-                    'start station latitude': 'Lat', 
-                    'start station longitude': 'Lon', 
+def origin_stations(args):
+    """Use pandas to clean the dataset and filter by
+        stations where rides originated from.
+    Args:
+        args : pandas dataframe with start station name, id, latitude and longitude.
+    """ 
+    df_grouped = args.groupby(['start_station_id', 'start_station_name', 'start_lat',
+       'start_lng'], as_index=False).agg(
+    count_col=pd.NamedAgg(column="start_station_id", aggfunc="count"))
+    # Rename our columns
+    df_grouped.rename(columns={'start_station_id': 'Station ID', 
+                    'start_station_name': 'Station Name', 
+                    'start_lat': 'Lat', 
+                    'start_lng': 'Lon', 
                     'count_col':'Number of Trips'}, inplace=True)
+    # Saving the dataframe to csv file
+    #df_grouped.to_csv("filtered_data.csv", index=False)
 
-# Saving the dataframe to csv file
-outpath = r'./2018Dec.csv'
-df_grouped.to_csv(outpath, index=False)
+
+# Call the functions for the dataframe.
+
 
 #Print statement to check for duplicate values
 print(f"There are {df_grouped.duplicated(subset='Station ID').sum()},"
