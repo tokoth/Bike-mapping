@@ -6,16 +6,13 @@ import geopandas as gpd
 import folium
 
 #Read in the downloaded data
-data = pd.read_csv(r"D:\WorkSpace\Bike Mapping\201812-citibike-tripdata\201812-citibike-tripdata.csv")
+data = pd.read_csv(r"D:\WorkSpace\Bike Mapping\201812-citibike-tripdata\201812-citibike-tripdata.csv", 
+                  parse_dates=['started_at','ended_at'])
 #Check top 5 rows of the data
 data.head()
 
 #Check data information number of rows, columns
 data.info()
-
-#Convert the start time and stop time columns to timestamp
-data['starttime'] = pd.to_datetime(data['starttime'])
-data['stoptime'] = pd.to_datetime(data['stoptime'])
 
 #Create new column from starttime column showing the day of the week
 data['start day']=data['starttime'].dt.day.astype('category') 
