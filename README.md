@@ -129,7 +129,7 @@ A Static Map plotted with Matplotlib and Contextily using information of the 201
 An Interactive map plotted with Folium showing the busiest bike stations used in the years 2018, 2019 ,and 2020. 
 You can interact with the map and change the basemap as well as switch and display the interested year.
 
-<iframe src="data/interactive_map.html" height="800" width="1000"></iframe>
+<iframe src="data/day15_interactive_map.html" height="800" width="1000"></iframe>
 
 Explore the interactive map further [here](https://tokoth.github.io/Bike-mapping/data/day15_interactive_map.html).
 
