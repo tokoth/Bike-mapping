@@ -131,7 +131,6 @@ You can interact with the map and change the basemap as well as switch and displ
 
 <iframe src="data/interactive_map.html" height="800" width="1000"></iframe>
 
-Explore the interactive map further [here](https://tokoth.github.io/Bike-mapping/data/interactive_map.html).
 Explore the interactive map further [here](https://tokoth.github.io/Bike-mapping/data/day15_interactive_map.html).
 
 <a name="Credits"></a>
